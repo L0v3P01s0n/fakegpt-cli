@@ -1,8 +1,8 @@
-# ChatGPT CLI
+# FakeGPT CLI
 
 ![Test Workflow](https://github.com/kardolus/chatgpt-cli/actions/workflows/test.yml/badge.svg?branch=main)
 
-ChatGPT CLI offers a robust interface for interacting with ChatGPT models directly from the command line, equipped with
+FakeGPT CLI offers a robust interface for interacting with ChatGPT models directly from the command line, equipped with
 streaming and advanced configurability.
 
 ![a screenshot](resources/vhs.gif)
@@ -45,8 +45,7 @@ streaming and advanced configurability.
   through default values, a `config.yaml` file, and environment variables. For quick adjustments, use the `--set-model`
   and `--set-max-tokens` flags. To verify your current settings, use the `--config` or `-c` flag. The newly
   added `omit_history` configuration option adds another layer of customization to your user experience.
-* **Availability Note**: This CLI supports both gpt-4 and gpt-3.5-turbo models. However, the specific ChatGPT model used
-  on chat.openai.com may not be available via the OpenAI API.
+* **Availability Note**: This CLI supports the gpt-3.5-turbo model, as the ai.fakeopen free pool only supports gpt-3.
 
 ## Installation
 
@@ -98,16 +97,8 @@ Choose the appropriate command for your system, which will download the binary, 
 
 ## Getting Started
 
-1. Set the `OPENAI_API_KEY` environment variable to
-   your [ChatGPT secret key](https://platform.openai.com/account/api-keys). To set the environment variable, you can add
-   the following line to your shell profile (e.g., ~/.bashrc, ~/.zshrc, or ~/.bash_profile), replacing your_api_key with
-   your actual key:
 
-    ```shell
-    export OPENAI_API_KEY="your_api_key"
-    ```
-
-2. To enable history tracking across CLI calls, create a ~/.chatgpt-cli directory using the command:
+1. To enable history tracking across CLI calls, create a ~/.chatgpt-cli directory using the command:
 
     ```shell
     mkdir -p ~/.chatgpt-cli
@@ -122,19 +113,19 @@ Choose the appropriate command for your system, which will download the binary, 
    the
    [Configuration](#configuration) section of this document.
 
-3. Try it out:
+2. Try it out:
 
     ```shell
     chatgpt what is the capital of the Netherlands
     ```
 
-4. To start interactive mode, use the `-i` or `--interactive` flag:
+3. To start interactive mode, use the `-i` or `--interactive` flag:
 
     ```shell
     chatgpt --interactive
     ```
 
-5. To use the pipe feature, create a text file containing some context. For example, create a file named context.txt
+4. To use the pipe feature, create a text file containing some context. For example, create a file named context.txt
    with the following content:
 
     ```shell
@@ -147,13 +138,13 @@ Choose the appropriate command for your system, which will download the binary, 
     cat context.txt | chatgpt "What kind of toy would Kya enjoy?"
     ```
 
-6. To list all available models, use the -l or --list-models flag:
+5. To list all available models, use the -l or --list-models flag:
 
     ```shell
     chatgpt --list-models
     ```
 
-7. For more options, see:
+6. For more options, see:
 
    ```shell
    chatgpt --help
@@ -161,7 +152,7 @@ Choose the appropriate command for your system, which will download the binary, 
 
 ## Configuration
 
-The ChatGPT CLI adopts a three-tier configuration strategy, with different levels of precedence assigned to default
+The FakeGPT CLI adopts a three-tier configuration strategy, with different levels of precedence assigned to default
 values, the `config.yaml` file, and environment variables, in that respective order.
 
 Configuration variables:
@@ -179,7 +170,7 @@ Configuration variables:
 | `presence_penalty`  | Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far.                                      | 0.0                            |
 | `thread`            | The name of the current chat thread. Each unique thread name has its own context.                                                                      | 'default'                      |
 | `omit_history`      | If true, the chat history will not be used to provide context for the GPT model.                                                                       | false                          |
-| `url`               | The base URL for the OpenAI API.                                                                                                                       | 'https://api.openai.com'       |
+| `url`               | The base URL for the OpenAI API.                                                                                                                       | 'https://ai.fakeopen.com'       |
 | `completions_path`  | The API endpoint for completions.                                                                                                                      | '/v1/chat/completions'         |
 | `models_path`       | The API endpoint for accessing model information.                                                                                                      | '/v1/models'                   |
 
@@ -218,7 +209,7 @@ chatgpt --config
 Executing this command will display the active configuration, including any overrides instituted by environment
 variables or the user configuration file.
 
-To facilitate convenient adjustments, the ChatGPT CLI provides two flags for swiftly modifying the `model`
+To facilitate convenient adjustments, the FakeGPT CLI provides two flags for swiftly modifying the `model`
 and `max_tokens` parameters in your user configured `config.yaml`. These flags are `--set-model` and `--set-max-tokens`.
 
 For instance, to update the model, use the following command:
@@ -227,12 +218,11 @@ For instance, to update the model, use the following command:
 chatgpt --set-model gpt-3.5-turbo-16k
 ```
 
-This feature allows for rapid changes to key configuration parameters, optimizing your experience with the ChatGPT CLI.
+This feature allows for rapid changes to key configuration parameters, optimizing your experience with the FakeGPT CLI.
 
 ## Development
 
-To start developing, set the `OPENAI_API_KEY` environment variable to
-your [ChatGPT secret key](https://platform.openai.com/account/api-keys). Follow these steps for running tests and
+To start developing, follow these steps for running tests and
 building the application:
 
 1. Run the tests using the following scripts:
@@ -261,7 +251,7 @@ building the application:
     ./scripts/all-tests.sh
     ```
 
-2. Build the app using the installation script:
+2. Build the app using the installation script (which is set to linux as tartget OS by default, keep that in mind and modify it as you need):
 
     ```shell
     ./scripts/install.sh
@@ -273,7 +263,7 @@ building the application:
     ./bin/chatgpt what type of dog is a Jack Russel?
     ```
 
-4. As mentioned previously, the ChatGPT CLI supports tracking conversation history across CLI calls. This feature
+4. As mentioned previously, the FakeGPT CLI supports tracking conversation history across CLI calls. This feature
    creates a seamless and conversational experience with the GPT model, as the history is utilized as context in
    subsequent interactions.
 
@@ -286,12 +276,12 @@ building the application:
 ## Reporting Issues and Contributing
 
 If you encounter any issues or have suggestions for improvements,
-please [submit an issue](https://github.com/kardolus/chatgpt-cli/issues/new) on GitHub. We appreciate your feedback and
+please submit an issue on the original project on GitHub (https://github.com/kardolus/chatgpt-cli), as this is only a small modification to it and I don't know anything about the go programming language xD. They'll appreciate your feedback and
 contributions to help make this project better.
 
 ## Uninstallation
 
-If for any reason you wish to uninstall the ChatGPT CLI application from your system, you can do so by following these
+If for any reason you wish to uninstall the FakeGPT CLI application from your system, you can do so by following these
 steps:
 
 ### Using Homebrew (macOS)
@@ -350,4 +340,4 @@ data. If you have any concerns about this, please feel free to delete this direc
 * [Join the conversation](https://www.reddit.com/r/ChatGPT/comments/14ip6pm/summarize_any_text_instantly_with_a_single/)
   on Reddit: Discuss the tool, ask questions, and share your experiences with our growing community.
 
-Thank you for using ChatGPT CLI!
+Thank you for using FakeGPT CLI!
