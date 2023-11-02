@@ -3,7 +3,7 @@
 ![Test Workflow](https://github.com/kardolus/chatgpt-cli/actions/workflows/test.yml/badge.svg?branch=main)
 
 FakeGPT CLI offers a robust interface for interacting with ChatGPT models directly from the command line, equipped with
-streaming and advanced configurability.
+streaming and advanced configurability without the need of an API key; using the one from FakeOpen.
 
 ![a screenshot](resources/vhs.gif)
 
